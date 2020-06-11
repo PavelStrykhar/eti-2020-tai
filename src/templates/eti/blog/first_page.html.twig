@@ -1,0 +1,16 @@
+{# templates/blog/first_page.html.twig #}
+{% extends 'eti/blog/layout.html.twig' %}
+
+{% block title %}Blog Index / FirstPage{% endblock %}
+
+{% block content %}
+    <p> Lucky number: {{ number }} </p>
+    <div>
+        <p>Default PHP translation: {{ translated_php }} <br />
+        Template translation: {% trans %}Translated string{% endtrans %}</p>
+    </div>
+    <div>
+        <p>Forced PL translation: {{ translated_php_pl }}<br />
+        PL Forced Template translation: {{ 'Translated string'|trans({}, 'messages', 'pl_PL') }}</p>
+    </div>
+{% endblock %}

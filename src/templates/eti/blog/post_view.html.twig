@@ -1,0 +1,34 @@
+{# templates/blog/first_page.html.twig #}
+{% extends 'eti/blog/layout.html.twig' %}
+
+{% block title %}Blog Index / Articles to read{% endblock %}
+
+{% block content %}
+    <p> {{ article.title }}: </p>
+
+    <ul>
+        {{ article.content }}
+    </ul>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <p>Add comment:</p>
+    {% if article.isAddingCommentAnonymous == true or article.isAddingComment == true and app.user != null %}
+        {{ form(form) }}
+    {% elseif article.isAddingCommentAnonymous == false and article.isAddingComment == true %}
+        You must log on to comment on this post
+    {% elseif article.isAddingCommentAnonymous == false and article.isAddingComment == false %}
+        Comments off
+    {% endif %}
+    <p> Comments: </p>
+    {% for comment in comments %}
+        <ul>
+            <li>{{ comment.username }}</li>
+            <li>{{ comment.addDate|date("Y-m-d H:m:i") }}</li>
+            <li>{{ comment.content }}</li>
+            <br><br>
+        </ul>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,58 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %} ETI Blog 2020. {% endblock %}
+    </title>
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+<body>
+<div id="sidebar">
+    {% block sidebar %}
+        <ul>
+            <li><a href="{{ path('post.homepage') }}">Home</a></li>
+            <li><a href="{{ path('post.first_page') }}">First Page</a></li>
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('app_login') }}">Login</a></li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('post.user_post') }}">My posts</a></li>
+            {% endif %}
+            <li><a href="{{ path('post.post_listing') }}">Posts</a></li>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('post.for_logged_users') }}">Posts for logged users</a></li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('post.add_post') }}">Add post</a></li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('account.settings') }}">Settings</a></li>
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('post.hidden_content') }}">Hidden content</a></li>
+            {% endif %}
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('app_register') }}">Register</a></li>
+            {% endif %}
+{#                <li><a href="{{ path('post.post_listing') }}">Posts</a></li>#}
+{#            {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#                <li><a href="{{ path('post.for_logged_users') }}">Posts for logged users</a></li>#}
+{#            {% endif %}#}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% endif %}
+
+
+        </ul>
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</div>
+</body>
+</html>

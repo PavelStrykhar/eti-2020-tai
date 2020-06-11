@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  apache_sf:
+    build: apache
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www
+      - ./apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+    working_dir: "/var/www"
+    links:
+      - db_sf
+  db_sf:
+    image: mysql:5.7
+    volumes:
+     - ./db:/var/lib/mysql
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+    ports:
+     - "33090:3306"
+
+  phpmyadmin_sf:
+    image: "phpmyadmin/phpmyadmin"
+    ports:
+     - "8080:80"
+    links:
+     - db_sf
+    environment:
+     - PMA_HOST=db_sf

@@ -1,0 +1,23 @@
+{# templates/blog/first_page.html.twig #}
+{% extends 'eti/blog/layout.html.twig' %}
+
+{% block title %}Articles to read{% endblock %}
+
+{% block content %}
+    <p> {{ posts }} </p>
+
+    <ul>
+    {% for article in articles %}
+        <li>
+            <a href="{{ path('post.post_details', {id:article.id}) }}">
+                {{ article.title }} - {{ article.summary }}
+            </a>
+            {% if app.user and article.creatorId == user %}
+                <a href="{{ path ('post.edit_post', {id:article.id}) }}">
+                    Edit
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

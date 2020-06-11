@@ -1,0 +1,11 @@
+{# templates/eti/blog/hidden_content.html.twig #}
+
+{% extends 'eti/blog/layout.html.twig' %}
+
+{% block title %}Hidden content{% endblock %}
+
+{% block content %}
+    <p> Hello, {{ "</br>" }}
+    Your id is {{ userId }} and the name is {{ userName }}.
+    </p>
+{% endblock %}

@@ -1,0 +1,15 @@
+{# templates/account/index.html.twig #}
+{% extends 'eti/blog/layout.html.twig' %}
+
+{% block title %}Adding post{% endblock %}
+
+{% block content %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <p>Adding post{{ "</br>" }}</p>
+    <p> {{ form(form) }} </p>
+
+{% endblock %}
